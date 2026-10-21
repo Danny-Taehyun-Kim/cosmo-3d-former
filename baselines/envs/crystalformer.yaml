@@ -1,0 +1,21 @@
+# Environment for the CrystalFormer and SigmaFormer baselines.
+# Both are trained with their original code, obtained from
+#   https://github.com/Danny-Taehyun-Kim/SigmaFormer
+# CrystalFormer is the baseline model in the directory CrystalFormer/ of that
+# repository and SigmaFormer is the sigma-profile augmented model. The
+# pre-trained encoder weights are available on request from the corresponding
+# author and are not part of the repository. The published results used the
+# versions pinned below; they are older than the environment used for
+# COSMO-3D-Former.
+name: cosmo3dformer-crystalformer
+channels: [conda-forge]
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - torch==1.7.1
+      - transformers==4.6.0
+      - scikit-learn==0.24.2
+      - numpy==1.24.4
+      - pandas==1.2.4
+      - rdkit

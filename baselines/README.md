@@ -1,15 +1,17 @@
 # Baselines
 
-Four published models are compared against COSMO-3D-Former. Their source code
-is not vendored here; install each from its official distribution and run it
-through the wrappers in this directory.
+Four published models are compared against COSMO-3D-Former. Their code is not
+included here. Uni-Mol and Uni-Mol2 are run through the wrapper in this
+directory. CrystalFormer and SigmaFormer were trained with their original
+training code, with the data splitting and target scaling replaced by the
+splits and target transformations of this repository.
 
-| Model | Input | Upstream |
-|-------|-------|----------|
-| Uni-Mol | 3D conformer | `unimol_tools`, https://github.com/deepmodeling/Uni-Mol |
-| Uni-Mol2 | 3D conformer | `unimol_tools` with the 1.1B checkpoint, https://github.com/deepmodeling/Uni-Mol |
-| CrystalFormer | SMILES | MoLFormer backbone, https://github.com/IBM/molformer |
-| SigmaFormer | SMILES and sigma-profile | MoLFormer backbone with a sigma-profile branch |
+| Model | Input | Pretraining data | Code |
+|-------|-------|------------------|------|
+| Uni-Mol | 3D conformer | 209 million conformations | `unimol_tools`, https://github.com/deepmodeling/Uni-Mol |
+| Uni-Mol2 | 3D conformer | 800 million conformations | `unimol_tools` with the 1.1B checkpoint, https://github.com/deepmodeling/Uni-Mol |
+| CrystalFormer | SMILES | 1.8 billion SMILES | https://github.com/Danny-Taehyun-Kim/SigmaFormer, directory `CrystalFormer/` (Pahari et al., AIChE J. 71, e18923, 2025) |
+| SigmaFormer | SMILES and σ53 | 1.8 billion SMILES | https://github.com/Danny-Taehyun-Kim/SigmaFormer (Kim et al., AIChE J. 72, e70450, 2026) |
 
 All four use the same folds, the same validation split and the same limited-data
 subsets as COSMO-3D-Former. Targets go through the per-property transform in
@@ -43,6 +45,21 @@ coords)`, which requires Python floats rather than a NumPy array, and its
 fine-tuning uses a micro-batch of 8 with 8 accumulation steps, giving the same
 effective batch as Uni-Mol v1.
 
+## CrystalFormer and SigmaFormer
+
+Both models were fine-tuned with their original training code. Only the
+internal data splitting and target scaling were replaced, by the folds, the
+validation split, the limited-data subsets and the per-property target
+transforms of this repository. SigmaFormer receives σ53, the 51-bin
+sigma-profile with the total surface area and cavity volume, as an additional
+input. The learning rate starts at 3e-5 rather than the 3e-4 default of the
+public code. The first ten epochs train the regression head only. At epoch 10
+the encoder and token embedding are unfrozen and the learning rate is lowered
+to 1e-5. The other settings are listed below.
+
+The pre-trained encoder weights are available on request from the corresponding
+author of the SigmaFormer paper; they are not part of either repository.
+
 ## Conformers
 
 Uni-Mol and Uni-Mol2 take 3D conformers. `cache_conformers.py` builds them once
@@ -59,14 +76,9 @@ conformer the attempt is repeated with random coordinates.
 | Setting | Uni-Mol, Uni-Mol2 | CrystalFormer, SigmaFormer |
 |---------|-------------------|----------------------------|
 | optimiser | AdamW | AdamW, betas (0.9, 0.99), weight decay 0 |
-| learning rate | see `envs/unimol.yaml` | 3e-5, dropped to 1e-5 at epoch 10 |
+| learning rate | see `envs/unimol.yaml` | 3e-5, lowered once to 1e-5 at epoch 10 |
 | batch size | see `envs/unimol.yaml` | 64 |
 | loss | Huber | SmoothL1 |
 | epochs | see `envs/unimol.yaml` | up to 500 |
 | early stopping | on validation loss | patience 50 on validation loss |
 | gradient clipping | 1.0 | 1.0 |
-
-The CrystalFormer and SigmaFormer learning rate is 3e-5, measured from the
-reference checkpoint rather than the 3e-4 default of the public repository. The
-first ten epochs train the regression head only; the backbone and the token
-embedding are unfrozen at epoch 10, which is also where the learning rate drops.
