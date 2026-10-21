@@ -1,0 +1,21 @@
+# Frozen-representation evaluation with ridge regression.
+# Values match Supplementary Table 2.
+alphas: [0.1, 1.0, 10.0, 100.0]
+standardise_features: true      # fitted on the training split only
+alpha_selection: validation_r2  # original property units, ties keep the smaller alpha
+refit_on: train                 # the chosen penalty is refitted on training only
+validation_fraction: 0.125      # one eighth of the non-test pool
+validation_seed_base: 42        # the seed for fold k is 42 + k
+
+transform:
+  Tb_K: log1p
+  Tc_K: standard
+  Pc_kPa: log1p
+  Vc_L_per_mol: log
+  Tm_K: standard
+  Tt_K: standard
+  flash_K: standard
+  autoign_K: standard
+  logKow: standard
+
+clean2_properties: [Pc_kPa, Vc_L_per_mol]

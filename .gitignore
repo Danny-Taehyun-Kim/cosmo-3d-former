@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.python-version
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Outputs, logs, temporary files
+*.log
+logs/
+runs/
+output/
+results/
+figures/
+tmp/
+
+# Model weights and large arrays; weights ship with the GitHub release
+*.pt
+*.ckpt
+*.h5
+*.npz
+*.parquet
+*.pkl
+weights/
+
+# Secrets
+*.key
+*.pem
+.env
+.envrc

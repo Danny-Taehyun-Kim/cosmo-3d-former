@@ -1,0 +1,20 @@
+# Environment used for the published COSMO-3D-Former results.
+# Versions are pinned to the ones the paper was produced with.
+name: cosmo3dformer
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.20
+  - pip
+  - pip:
+      - torch==2.5.1          # PyPI wheel, CUDA 12.4; the paper used the cu121 build
+      - numpy==2.2.6
+      - scipy==1.15.3
+      - pandas==2.3.3
+      - h5py==3.16.0
+      - scikit-learn==1.7.2
+      - rdkit==2026.3.3
+      - pyarrow==24.0.0
+      - pyyaml==6.0.3
+      - matplotlib==3.9.4
+      - pytest==8.3.4

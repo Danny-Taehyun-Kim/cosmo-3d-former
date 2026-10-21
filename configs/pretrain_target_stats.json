@@ -1,0 +1,10 @@
+{
+  "note": "Target statistics of the masked-autoencoder objective, computed over the valid patches of the 355,057 pre-training molecules. Reuse these when evaluating reconstruction so that predictions are returned on the same scale the decoder was trained on.",
+  "channels": ["sigma", "area", "potential", "burial"],
+  "units": ["e/A^2", "A^2", "e/A", "solid angle"],
+  "n_train_molecules": 355057,
+  "n_valid_patches": 41746564,
+  "convention": "Welford float64, Bessel (n-1), matching torch .std()",
+  "mean": [-0.000546626833531719, 2.100014575354403, 0.009054040026221143, 0.3358450013694573],
+  "std": [0.005312425672534886, 0.38312709843374254, 0.05290734545448828, 0.16729984817740373]
+}

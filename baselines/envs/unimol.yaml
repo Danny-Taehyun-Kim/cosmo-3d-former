@@ -1,0 +1,38 @@
+# Environment for the Uni-Mol and Uni-Mol2 baselines.
+# Versions are the ones the published runs used.
+#
+# Uni-Mol is reached through unimol_tools. The unicore package is not needed
+# and is not installed; the wrappers call unimol_tools.UniMolRepr and
+# unimol_tools.data.conformer directly.
+#
+# Weights are not bundled with the package. On first use unimol_tools fetches
+# them from Hugging Face into its weight directory, which defaults to
+# <site-packages>/unimol_tools/weights and is overridden by UNIMOL_WEIGHT_DIR
+# (the --weight-dir option of unimol_finetune.py):
+#   Uni-Mol v1   repo dptech/Uni-Mol-Models
+#                mol_pre_all_h_220816.pt   190.5 MB   all-hydrogen model
+#                mol.dict.txt                         token dictionary
+#   Uni-Mol2     repo dptech/Uni-Mol2
+#                modelzoo/1.1B/checkpoint.pt   4.52 GB
+# The wrappers pass remove_hs=False to match the all-hydrogen v1 model, and
+# take the Uni-Mol2 checkpoint as an explicit path. Populate the weight
+# directory from a node with outbound network access before running on compute
+# nodes that have none.
+name: cosmo3dformer-unimol
+channels: [conda-forge]
+dependencies:
+  - python=3.10.20
+  - pip
+  - pip:
+      - torch==2.5.1          # built against CUDA 12.1
+      - unimol_tools==0.1.6
+      - rdkit==2026.3.3
+      - numpy==2.2.6
+      - pandas==2.3.3
+      - scikit-learn==1.7.2
+      - huggingface-hub==1.23.0
+      - transformers==5.13.1
+      - lmdb==2.3.0
+      - joblib==1.5.3
+      - tqdm==4.68.4
+      - pyarrow==24.0.0

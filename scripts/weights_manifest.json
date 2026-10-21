@@ -1,0 +1,45 @@
+{
+ "base_url": "https://github.com/Danny-Taehyun-Kim/cosmo-3d-former/releases/download/v1.0.0",
+ "files": [
+  {
+   "name": "L_encoder_ep150.pt",
+   "sha256": "c631c3745d653c690abb51214df35d54ceaa2ea528e7f2b3f7029aadca450580",
+   "size_bytes": 182191311
+  },
+  {
+   "name": "M_encoder_ep146.pt",
+   "sha256": "4daa91e8090d931454e2ae530e650eee80773d8e8fd166b9d1f5101442c1be48",
+   "size_bytes": 88801807
+  },
+  {
+   "name": "M_full_ep150.pt",
+   "sha256": "9933440dbeeb21d39658e1440c5ed168631bee4bf7356211446ee38dd3f46d0d",
+   "size_bytes": 90691356
+  },
+  {
+   "name": "M_no_bias_encoder_ep146.pt",
+   "sha256": "7799f695e926f4fa84fa8c5423a341380d4e586f8a251f4daf9136e86dcad241",
+   "size_bytes": 88803191
+  },
+  {
+   "name": "M_untrained_seed1234.pt",
+   "sha256": "1035aed512bb313855bb67db3dc1acef7c51dfca205a72fc62da68a71e5bbe7e",
+   "size_bytes": 88802416
+  },
+  {
+   "name": "M_untrained_seed1235.pt",
+   "sha256": "175fba4ca481ec8b2488806c7b968e0d59202b2f681dd937687c018d4b53cabf",
+   "size_bytes": 88802416
+  },
+  {
+   "name": "M_untrained_seed1236.pt",
+   "sha256": "7f89945af3da0f42c309e41b10082567bc20947ec85a20bde34ca31bcc32733a",
+   "size_bytes": 88802416
+  },
+  {
+   "name": "S_encoder_ep147.pt",
+   "sha256": "3a3647c29c07ebab2bfccc407fd2cfef2b236116737dbbf3fbf302f286c283ce",
+   "size_bytes": 25387343
+  }
+ ]
+}
