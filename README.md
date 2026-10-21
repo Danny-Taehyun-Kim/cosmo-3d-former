@@ -1,5 +1,7 @@
 # COSMO-3D-Former
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23537518.svg)](https://doi.org/10.5281/zenodo.23537518)
+
 A patch-based encoder for COSMO molecular surfaces. The model is pre-trained by
 masked surface reconstruction on 362,303 molecules and is used either as a
 frozen representation or as a fine-tuned predictor of pure-component
@@ -259,6 +261,10 @@ state is not included.
 Kim, T. H., Davis, K., Cha, Y. & Kwon, J. S.-I. Thermodynamically informed
 representation learning for data-efficient molecular property prediction.
 Manuscript submitted (2026).
+
+The version used in the paper (v1.0.0) is archived at
+https://doi.org/10.5281/zenodo.23537519. All versions:
+https://doi.org/10.5281/zenodo.23537518.
 
 Surface database: PubChemQC COSMO sigma-profile database, DOI 10.5281/zenodo.20672192
 

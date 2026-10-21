@@ -6,6 +6,7 @@ abstract: >-
   surface reconstruction and evaluated on pure-component property prediction.
 type: software
 version: 1.0.0
+doi: 10.5281/zenodo.23537518
 license: MIT
 repository-code: https://github.com/Danny-Taehyun-Kim/cosmo-3d-former
 authors:

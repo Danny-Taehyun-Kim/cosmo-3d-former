@@ -28,6 +28,15 @@ from cosmo3dformer.pretrain import AUX_COL, TARGET_COLS
 from cosmo3dformer.reconstruction import evaluate_round, sign_agreement
 
 
+def relative_to_repository(path):
+    """Path relative to the repository root, or absolute when it lies outside."""
+    resolved = Path(path).resolve()
+    try:
+        return str(resolved.relative_to(Path(__file__).resolve().parents[1]))
+    except ValueError:
+        return str(resolved)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cosmo", required=True)
@@ -66,7 +75,7 @@ def main():
         mean = torch.tensor(stats["mean"], dtype=torch.float32)
         std = torch.tensor(stats["std"], dtype=torch.float32)
         mu, sd, amu, asd = mean[:3], std[:3], mean[3], std[3]
-        source = args.target_stats
+        source = relative_to_repository(args.target_stats)
     else:
         valid = pad
         mu = torch.stack([targets[..., k][valid].mean() for k in range(3)])
